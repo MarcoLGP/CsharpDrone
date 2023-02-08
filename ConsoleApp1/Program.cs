@@ -4,9 +4,9 @@
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hellow");
-            Exercicios.Imprimir();
-            Exercicios.Soma(52, 35);
+            Drone d1 = new Drone();
+            d1.AumentarVelocidade();
+            Console.WriteLine(d1.Velocidade);
         }
     }
 }
