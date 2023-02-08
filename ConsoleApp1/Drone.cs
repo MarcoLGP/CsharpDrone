@@ -1,7 +1,9 @@
-﻿namespace ConsoleApp1
+﻿namespace DroneExplorer
 {
     internal class Drone
     {
+        public string UserName { get; set; }
+        public string DroneName { get; set; }
         private double? _Altura { get; set; }
         private double? _Angulo { get; set; }
         public double? Velocidade { get; set; }
@@ -14,6 +16,13 @@
         {
             _Altura = 0;
         }
+
+        public void DefinirDrone(string userName, string droneName)
+        {
+            UserName = userName;
+            DroneName = droneName;
+        }
+
         public void DefinirAltura(double altura)
         {
             if (altura > 25 || altura < 0.5) 
