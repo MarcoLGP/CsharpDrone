@@ -8,7 +8,7 @@ namespace DroneExplorer
         {
             if (!string.IsNullOrWhiteSpace(text))
             {
-                Console.WriteLine(string.Format("{0," + ((Console.BufferWidth / 2) + (text.Length / 2)) + "}", text));
+                Console.WriteLine("{0," + ((Console.WindowWidth / 2) + text.Length / 2) + "}", text);
             }
             else
             {
@@ -69,6 +69,7 @@ namespace DroneExplorer
         public static void NameUser(ref string menu, Drone drone)
         {
             Header("DRONE EXPLORER");
+            Console.WriteLine("");
             Console.Write("Digite o seu nome[enter para confirmar]: ");
             var NameUser = Console.ReadLine();
             Console.Write("Digite o nome do seu drone[enter para confirmar]: ");
@@ -79,6 +80,33 @@ namespace DroneExplorer
 
             drone.DefinirDrone(userName: NameUser, droneName: DroneName);
             menu = "Play";
+            Console.Clear();
+        }
+
+        public static void Play(Drone droneInfo)
+        {
+            Header(textHeader: "DRONE EXPLORER");
+            /*
+                		  ^
+                         | |       _\^/_                      ============================================
+                         | |       >_ _<                      |            PAINEL DE CONTROLE            |
+                         | |        '|`                       ============================================ 
+                       _|| ||_                                |   Piloto: {droneInfo.UserName}           |
+                       |  |  |                                |   Drone: {droneInfo.DroneName}           |             
+                       \  |  /                                |   Velocidade: 10 m/s                     |
+                       /  |  \                                ============================================
+                      /|  |  |\               
+                     /    |    \
+                    /     |     \
+                  //      |      \\
+                 /|       |       |\
+                / |       !       | \
+               / @|       !       |@ \
+              |....  ___  !  ___  ....|
+              |__----   \_!_/   ----__|
+             */
+            Console.WriteLine($"   \t\t               ^\r\n                              | |       _\\^/_                  ============================================\r\n      \t\t              | |       >_ _<                  |            PAINEL DE CONTROLE            |\r\n                              | |        '|`                   ============================================ \r\n                            _|| ||_                            |   Piloto: {droneInfo.UserName}           |\r\n                            |  |  |                            |   Drone: {droneInfo.DroneName}           |             \r\n                            \\  |  /                            |   Velocidade: 10 m/s                     |\r\n                            /  |  \\                            ============================================\r\n                           /|  |  |\\               \r\n                          /    |    \\\r\n                         /     |     \\\r\n                       //      |      \\\\\r\n                      /|       |       |\\\r\n                     / |       !       | \\\r\n                    / @|       !       |@ \\\r\n                   |....  ___  !  ___  ....|\r\n                   |__----   \\_!_/   ----__|");
+            Console.Read();
         }
 
     }

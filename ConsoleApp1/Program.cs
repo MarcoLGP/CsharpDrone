@@ -14,7 +14,7 @@
             // Inicializando a classe do drone.
             Drone droneInfo = new();
 
-            while(true)
+            while (true)
             {
                 switch(menu)
                 {
@@ -35,6 +35,7 @@
                         Environment.Exit(0);
                         break;
                     case "Play":
+                        Screen.Play(droneInfo);
                         break;
                 }
             }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace DroneExplorer
 {
-    internal class WindowConfig
+    class WindowConfig
     {
         private const int MF_BYCOMMAND = 0x00000000;
         public const int SC_SIZE = 0xF000;
@@ -31,7 +26,7 @@ namespace DroneExplorer
                 DeleteMenu(sysMenu, SC_SIZE, MF_BYCOMMAND);
             }
 
-            Console.SetWindowSize(height: 30, width: 120);
+            Console.SetWindowSize(height: 30, width: 128);
         }
     }
 }
