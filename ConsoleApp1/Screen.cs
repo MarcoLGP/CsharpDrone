@@ -4,7 +4,17 @@ namespace DroneExplorer
 {
     class Screen
     {
-        public static void Line([Optional]string? text, [Optional]bool? alignCenter)
+        public static string PadCenter(string source, int totalWidth, char paddingChar = ' ')
+        {
+            int spaces = totalWidth - source.Length;
+            int padLeft = spaces / 2 + source.Length;
+            return source.PadLeft(padLeft, paddingChar).PadRight(totalWidth, paddingChar);
+        }
+        public static string AlignText(string text, int widthTotal)
+        {
+            return text.PadLeft(((widthTotal - text.Length) / 2) + text.Length) + "".PadRight(-((widthTotal - text.Length) / 2) + text.Length + 1);
+        }
+        public static void Line([Optional]string? text)
         {
             if (!string.IsNullOrWhiteSpace(text))
             {
@@ -20,15 +30,15 @@ namespace DroneExplorer
         public static void Header(string textHeader)
         {
             Line();
-            Line(text: textHeader, alignCenter: true);
+            Line(text: textHeader);
             Line();
         }
 
         public static void Home(ref string menu)
         {
             Header(textHeader: "DRONE EXPLORER");
-            Line(text: "Bem vindo ao Drone Explorer, um passatempo divertido de exploração.", alignCenter: true);
-            Line(text: "Colete o máximo possível de objetos e explore por aí com seu drone, vamos começar ?", alignCenter: true);
+            Line(text: "Bem vindo ao Drone Explorer, um passatempo divertido de exploração.");
+            Line(text: "Colete o máximo possível de objetos e explore por aí com seu drone, vamos começar ?");
             Console.WriteLine("");
             Console.WriteLine("[1]. Começar");
             Console.WriteLine("[2]. Regras");
@@ -86,6 +96,7 @@ namespace DroneExplorer
         public static void Play(Drone droneInfo)
         {
             Header(textHeader: "DRONE EXPLORER");
+            Console.WriteLine("");
             /*
                 		  ^
                          | |       _\^/_                      ============================================
@@ -105,7 +116,7 @@ namespace DroneExplorer
               |....  ___  !  ___  ....|
               |__----   \_!_/   ----__|
              */
-            Console.WriteLine($"   \t\t               ^\r\n                              | |       _\\^/_                  ============================================\r\n      \t\t              | |       >_ _<                  |            PAINEL DE CONTROLE            |\r\n                              | |        '|`                   ============================================ \r\n                            _|| ||_                            |   Piloto: {droneInfo.UserName}           |\r\n                            |  |  |                            |   Drone: {droneInfo.DroneName}           |             \r\n                            \\  |  /                            |   Velocidade: 10 m/s                     |\r\n                            /  |  \\                            ============================================\r\n                           /|  |  |\\               \r\n                          /    |    \\\r\n                         /     |     \\\r\n                       //      |      \\\\\r\n                      /|       |       |\\\r\n                     / |       !       | \\\r\n                    / @|       !       |@ \\\r\n                   |....  ___  !  ___  ....|\r\n                   |__----   \\_!_/   ----__|");
+            Console.WriteLine($"              \t\t^                                       ┌─────────────────────────────────────────┐\r\n                       | |       _\\^/_                          │             PAINEL DO DRONE             │\r\n                       | |       >_ _<                          ├─────────────────────────────────────────┤\r\n                       | |        '|`                           │ Piloto: {droneInfo.UserName}            │ \r\n                     _|| ||_                                    │ Drone: {droneInfo.DroneName}            │\r\n                     |  |  |                                    │ Velocidade: {droneInfo.Velocidade}      │\r\n                     \\  |  /                                    │ Altura: {droneInfo.Altura}              │\r\n                     /  |  \\                                    └─────────────────────────────────────────┘ \r\n                    /|  |  |\\                                       \r\n                   /    |    \\                     ┌───────────────────────────┐      ┌────────────────────────┐   \r\n                  /     |     \\                    │          CONTROLE         │      │      STATUS DRONE      │\r\n                //      |      \\\\                  ├───────────────────────────┤      ├────────────────────────┤\r\n               /|       |       |\\                 │ Velocidade ↑/↓: W/S       │      │      {droneInfo.Status}      │\r\n\t      / |       !       | \\\t           │ Altura ↑/↓: Q/A           │      └────────────────────────┘\r\n             / @|       !       |@ \\               │ Abrir/fechar Mochila: A/F │      ┌────────────────────────┐       \r\n            |....  ___  !  ___  ....|              │ Coletar objeto: C         │      │      STATUS BRACOS     │\r\n            |__----   \\_!_/   ----__|              └───────────────────────────┘      ├────────────────────────┤\r\n\t\t\t\t\t\t\t\t\t              │       {droneInfo.StatusBracos}       │\r\n\t  ┌───────────────────────────┐\t                               \t\t      └────────────────────────┘\r\n\t  │       Comp. de bordo      │\r\n\t  ├───────────────────────────┤\r\n\t  │{PadCenter(source: droneInfo.CompDeBordo, totalWidth: 27)}│\r\n\t  └───────────────────────────┘");
             Console.Read();
         }
 

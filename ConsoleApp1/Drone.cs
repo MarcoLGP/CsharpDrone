@@ -4,17 +4,22 @@
     {
         public string UserName { get; set; }
         public string DroneName { get; set; }
-        private double? _Altura { get; set; }
-        private double? _Angulo { get; set; }
+        
+        public double? Altura { get; set; }
         public double? Velocidade { get; set; }
-        private string? _Status { get; set; }
-        private string? _StatusBracos { get; set; }
-        private string? _AnguloBracos { get; set; }
-        private List<string>? _Mochila { get; set; }
+        public string? CompDeBordo { get; set; }
+        public string? Status { get; set; }
+        public string? StatusBracos { get; set; }
+        public List<string>? Mochila { get; set; }
 
         public Drone()
         {
-            _Altura = 0;
+            Altura = 0;
+            Velocidade = 0;
+            StatusBracos = "Em repouso";
+            CompDeBordo = "Coletando objeto";
+            Mochila = new List<string>();
+            Status = "Coletando";
         }
 
         public void DefinirDrone(string userName, string droneName)
@@ -29,52 +34,21 @@
             {
                 throw new Exception("Altura inválida, deve estar entre 0,5m e 20m");
             }
-            _Altura = altura;
+            Altura = altura;
         }
         public void AumentarAltura()
         {
-            if (_Altura > 25)
+            if (Altura > 25)
             {
                 throw new Exception("Altura máxima já atingida");
             }
-            _Altura += 0.5;
+            Altura += 0.5;
         }
-        public void DefinirAngulo(double angulo)
-        {
-            if (angulo > 360 || angulo < 0) 
-            {
-                throw new Exception("Ângulo inválido");
-            }
-            _Angulo = angulo;
-        }
-        public void MoverEsquerda()
-        {
-            double? novoAngulo = _Angulo - 5;
-            if (novoAngulo <= 0)
-            {
-                _Angulo = 360 - novoAngulo * -1;
-            }
-            else
-            {
-                _Angulo -= 5;
-            }
-        }
-        public void MoverDireita()
-        {
-            double? novoAngulo = _Angulo + 5;
-            if (novoAngulo >= 360)
-            {
-                _Angulo = novoAngulo - 360;   
-            }
-            else
-            {
-                _Angulo = novoAngulo;
-            }
-        }
+       
         public void AumentarVelocidade()
         {
             double? novaVelocidade = Velocidade + 0.5;
-            if (novaVelocidade < 15 && _Status == "Em movimento")
+            if (novaVelocidade < 15 && Status == "Em movimento")
             {
                 Velocidade = novaVelocidade;
             }
@@ -82,7 +56,7 @@
         public void DiminuirVelocidade()
         {
             double? novaVelocidade = Velocidade - 0.5;
-            if (novaVelocidade > 0 && _Status == "Em movimento")
+            if (novaVelocidade > 0 && Status == "Em movimento")
             {
                 Velocidade = novaVelocidade;
             }
@@ -92,7 +66,7 @@
             if (Velocidade == 0)
             {
                 Velocidade = 0.5;
-                _Status = "Em aproximação";
+                Status = "Em aproximação";
             }
             else
             {
@@ -101,23 +75,23 @@
         }
         public void DistanciarObjeto()
         {
-            _Status = "Em movimento";
+            Status = "Em movimento";
         }
         public void BracosEmMovimento()
         {
-            _StatusBracos = "Repouso";
+            StatusBracos = "Repouso";
         }
         public void BracosEmRepouso()
         {
-            _StatusBracos = "Disponível";
+            StatusBracos = "Disponível";
         }
         public void BracosUsar()
         {
-            _StatusBracos = "Em atividade";
+            StatusBracos = "Em atividade";
         }
         public void BracosPegar(string objeto)
         {
-            _Mochila.Add(objeto);
+            Mochila.Add(objeto);
         }
     }
 }
